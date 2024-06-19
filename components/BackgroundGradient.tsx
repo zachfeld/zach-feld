@@ -10,7 +10,7 @@ export default function BackgroundGradient() {
         <ShaderGradientCanvas
         importedfiber={{ ...fiber, ...drei, ...reactSpring }}
         style={{
-          position: "absolute",
+          position: "fixed",
           top: 0,
           pointerEvents: "none",
           height: "100vh",

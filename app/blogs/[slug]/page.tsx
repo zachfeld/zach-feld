@@ -62,8 +62,8 @@ export default function Post({ params }: any) {
     const props = getPost(params)
 
     return (
-    <div className='flex justify-center py-12 px-5'>
-        <div className='bg-slate-900 max-w-[98%] mx-auto py-12 shadow-2xl p-10 rounded-lg fixed middle-0 max-h-[94%] overflow-scroll'>
+    <div className='flex justify-center py-12'>
+        <div className='bg-slate-900 max-w-[98%] mx-auto py-12 px-10 shadow-2xl max-h-[92%] rounded-lg fixed overflow-scroll'>
             <article className='prose prose-md md:prose-base lg:prose-lg prose-slate !prose-invert mx-auto'>
                 <h1>
                     {props.frontMatter.title}
