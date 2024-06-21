@@ -1,7 +1,3 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-
 // mdx configuration
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
@@ -13,6 +9,10 @@ import Button from '@/components/mdx/Button'
 import CustomLink from '@/components/mdx/CustomLink'
 import YouTube from '@/components/mdx/YouTube'
 
+import { blogPosts } from '../blogs_gen'
+import { notFound } from 'next/navigation'
+
+export const runtime = 'edge'
 
 const components = {
     Button,
@@ -28,17 +28,17 @@ const options = {
 }
 
 export async function generateStaticParams() {
-    const files = fs.readdirSync(path.join('blogs'))
-
-    const paths = files.map(filename => ({
-        slug: filename.replace('.mdx', '')
-    }))
-
+    const paths = blogPosts.map((b) => b.slug )
+    
     return paths
 }
 
 export async function generateMetadata({ params }: any) {
     const blog = getPost(params)
+
+    if (!blog) {
+        notFound()
+    }
 
     return {
         title: blog.frontMatter.title,
@@ -47,19 +47,15 @@ export async function generateMetadata({ params }: any) {
 }
 
 function getPost({slug}:{slug: string}) {
-    const markdownFile = fs.readFileSync(path.join('blogs', slug + '.mdx'), 'utf-8')
-
-    const { data: frontMatter, content } = matter(markdownFile)
-
-    return {
-        frontMatter,
-        slug,
-        content
-    }
+    return blogPosts.find((b) => b.slug === slug)
 }
 
 export default function Post({ params }: any) {
     const props = getPost(params)
+
+    if (!props) {
+        notFound()
+    }
 
     return (
     <div className='flex justify-center py-12'>
