@@ -64,7 +64,7 @@ export default function Post({ params }: any) {
                 <h1>
                     {props.frontMatter.title}
                 </h1>
-
+                                
                 <MDXRemote 
                     source={props.content} 
                     components={components}
