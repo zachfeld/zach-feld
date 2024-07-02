@@ -1,1 +1,0 @@
-export const blogPosts = [{"frontMatter":{"title":"Hello Blog","date":"2th July 2024","description":"Welcome to the Blog 👋"},"slug":"hello-blog","content":"\nWelcome!\n\n"}]
